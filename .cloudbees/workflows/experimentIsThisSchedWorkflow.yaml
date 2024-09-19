@@ -1,0 +1,50 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: My workflow
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      param1:
+        type: string
+        default: foo
+      param2:
+        type: string
+        default: bar
+  schedule:
+    - cron:  '*/7 * * * *'
+    - cron:  '*/12 * * * *'
+     
+jobs:
+  build:
+    environment: us-env
+    steps:
+      - uses: docker://golang:1.20.3-alpine3.17
+        name: Prop check
+        shell: sh
+        run: >
+          echo "Variables and secrets prop1: '${{ vars.prop1 }}', prop2: '${{
+          vars.prop2 }}' prop3: '${{ vars.prop3 }}' secret: '${{ secrets.secret1
+          }}'"
+
+          echo "OS env variables prop1: '$prop1', prop2: '$prop2' prop3:
+          '$prop3' secret: '$secret1'"
+      - uses: docker://golang:1.20.3-alpine3.17
+        name: Env check - properties set on step env
+        shell: sh
+        env:
+          prop2: ${{vars.prop2}}
+          prop3: this-step-env-prop
+          secret1: ${{secrets.secret1}}
+        run: >
+          echo "Variables and secrets context prop1: '${{ vars.prop1 }}', prop2:
+          '${{ vars.prop2 }}' prop3: '${{ vars.prop3 }}' secret: '${{
+          secrets.secret1 }}'"
+
+          echo "env context prop1: '${{ env.prop1 }}', prop2: '${{ env.prop2 }}'
+          prop3: '${{ env.prop3 }}' secret: '${{ secrets.secret1 }}'"
+
+          echo "OS env variables prop1: '$prop1', prop2: '$prop2' prop3:
+          '$prop3' secret: '${secret1:2}'"   

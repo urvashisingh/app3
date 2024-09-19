@@ -1,0 +1,30 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Test API workflow
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      param1:
+        default: foo
+        type: string
+      param2:
+        default: bar
+        type: string
+jobs:
+  test:
+    steps:
+      - name: Call API
+        uses: https://github.com/urvashisingh/try-api-action
+        with:
+          http-method: get
+          uri: /reserved/v1/resources/e3ebadbf-995d-4733-91f4-7953bedc73c9/workflow-properties
+  publish:
+    steps:
+      - uses: cloudbees-io/publish-evidence-item
+        name: Test publish-evidence-item action
+        id: testAction
+        with:
+          content: test
