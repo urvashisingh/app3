@@ -14,8 +14,8 @@ on:
         type: string
         default: bar
   schedule:
-    - cron:  '*/7 * * * *'
-    - cron:  '*/12 * * * *'
+    - cron: 7 * * * *
+    - cron: 12 * * * *
      
 jobs:
   build:
