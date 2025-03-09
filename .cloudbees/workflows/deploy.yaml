@@ -1,0 +1,26 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: My workflow
+
+on:
+  workflow_call:
+    inputs:
+      manifest:
+        type: string
+        required: true
+      environment:
+         type: string
+         required: true  
+
+jobs:
+  deploy-Art21:
+    steps:
+      - name: Deploy Art21
+        if: ${{ fromJSON(inputs.manifest).Art21.deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          name: "Art21"
+          version: "${{ fromJSON(inputs.manifest).Art21.version }}"
+          url: "docker.io/MyApp/Art21:${{ fromJSON(inputs.manifest).Art21.version }}"
+          target-environment: "${{ inputs.environment }}"
+     
