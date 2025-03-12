@@ -21,6 +21,6 @@ jobs:
         with:
           name: "art3"
           version: "${{ fromJSON(inputs.manifest).art3.version }}"
-          url: "docker.io/MyApp/art3:${{ fromJSON(inputs.manifest).art3.version }}"
+          url: "${{ fromJSON(inputs.manifest).art3.url }}"
           target-environment: "${{ inputs.environment }}"
      
