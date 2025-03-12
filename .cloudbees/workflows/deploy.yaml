@@ -13,14 +13,14 @@ on:
          required: true  
 
 jobs:
-  deploy-Art21:
+  deploy-art3:
     steps:
-      - name: Deploy Art21
-        if: ${{ fromJSON(inputs.manifest).Art21.deploy }}
+      - name: Deploy art3
+        if: ${{ fromJSON(inputs.manifest).art3.deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          name: "Art21"
-          version: "${{ fromJSON(inputs.manifest).Art21.version }}"
-          url: "docker.io/MyApp/Art21:${{ fromJSON(inputs.manifest).Art21.version }}"
+          name: "art3"
+          version: "${{ fromJSON(inputs.manifest).art3.version }}"
+          url: "docker.io/MyApp/art3:${{ fromJSON(inputs.manifest).art3.version }}"
           target-environment: "${{ inputs.environment }}"
      
