@@ -28,3 +28,17 @@ jobs:
         id: testAction
         with:
           content: test
+      - uses: cloudbees-io/publish-evidence-item
+        name: Test publish-evidence-item action
+        with:
+          content: |
+            multi-line
+            evidence
+            here      
+      - uses: cloudbees-io/publish-evidence-item
+        name: Test publish-evidence-item action
+        with:
+          content: |
+            another
+            evidence
+            here        
