@@ -17,10 +17,8 @@ jobs:
     steps:
       - name: Deploy art3
         if: ${{ fromJSON(inputs.manifest).art3.deploy }}
-        uses: cloudbees-io/register-deployed-artifact@v1
+        uses: cloudbees-io/register-deployed-artifact@v2
         with:
-          name: "art3"
-          version: "${{ fromJSON(inputs.manifest).art3.version }}"
-          url: "${{ fromJSON(inputs.manifest).art3.url }}"
+          artifact_id: "${{ fromJSON(inputs.manifest).art3.artifact_id }}"
           target-environment: "${{ inputs.environment }}"
      
