@@ -1,10 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: Workflow 2
-description: This is my workflow
-author: Urvashi Singh
-foo:  test
-
 
 on:
   workflow_dispatch:
