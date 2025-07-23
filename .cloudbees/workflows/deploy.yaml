@@ -27,6 +27,6 @@ jobs:
         if: ${{ fromJSON(inputs.manifest).art3.deploy }}
         uses: cloudbees-io/register-deployed-artifact@v2
         with:
-          artifact_id: "${{ fromJSON(inputs.manifest).art3.id }}"
+          artifact-id: "${{ fromJSON(inputs.manifest).art3.id }}"
           target-environment: "${{ inputs.environment }}"
      
