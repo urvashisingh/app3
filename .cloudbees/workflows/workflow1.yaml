@@ -30,7 +30,6 @@ jobs:
           echo "hello build long prop ${{vars.lengthtest}}"          
   deploy:
     needs: build
-    environment: us-env
     steps:
       - name: Deploy to env after approval
         uses: docker://golang:1.20.3-alpine3.17
