@@ -1,16 +1,13 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
-
 on:
   pull_request:
     branches:
-      - 'main'
-  workflow_dispatch: 
-  
+      - main
+  workflow_dispatch:
   schedule:
-    - cron: 0,5,10,15,20,25,30,35,40,45,50,55 * * * *
-
+    - cron: 0 0 1 * *
 jobs:
   build:
     steps:
@@ -19,7 +16,6 @@ jobs:
         shell: sh
         run: |
           echo "hello world"
-  
   afterbuild:
     needs: build
     steps:
