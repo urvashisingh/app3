@@ -15,6 +15,7 @@ on:
       artifact-id:
         type: string
         required: true
+        default: "bbeb9fc8-231a-48f1-86bf-1e53dffc8e52"
       environment:
         type: string
         required: true
