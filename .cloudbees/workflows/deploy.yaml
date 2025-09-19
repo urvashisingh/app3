@@ -19,6 +19,7 @@ on:
       environment:
         type: string
         required: true
+        default: dev
 jobs:
   Deploy:
     environment: ${{ inputs.environment }}
