@@ -12,26 +12,9 @@ metadata:
         - man_appr_2
         - Done
 jobs:
-  man_appr_1:
-    needs: Start
-    timeout-minutes: 4320
-    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-    with:
-      instructions: ""
-      disallowLaunchByUser: false
-      approvers: 4bc37dfe-459a-11ed-a6a3-42010a83ae66
-      notifyAllEligibleUsers: false
-  man_appr_2:
-    needs: man_appr_1
-    timeout-minutes: 4320
-    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-    with:
-      instructions: ""
-      disallowLaunchByUser: false
-      approvers: 4bc37dfe-459a-11ed-a6a3-42010a83ae66
-      notifyAllEligibleUsers: false
   Done:
-    needs: man_appr_2
+    needs:
+      - man_appr_2
     steps:
       - run: echo "Done!"
         uses: docker://golang:1.20.3-alpine3.17
@@ -41,3 +24,20 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         name: Hello world
         shell: sh
+  man_appr_1:
+    needs: Start
+    timeout-minutes: 4320
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+    with:
+      disallowLaunchByUser: false
+      notifyAllEligibleUsers: false
+      approvers: 4bc37dfe-459a-11ed-a6a3-42010a83ae66,0cb88e48-03d3-11eb-9d67-42010a83ae35
+  man_appr_2:
+    needs:
+      - man_appr_1
+    timeout-minutes: 4320
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+    with:
+      disallowLaunchByUser: false
+      notifyAllEligibleUsers: false
+      approvers: 4bc37dfe-459a-11ed-a6a3-42010a83ae66,0cb88e48-03d3-11eb-9d67-42010a83ae35
