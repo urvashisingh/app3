@@ -14,11 +14,11 @@ jobs:
     needs:
       - approval-job
   approval-job:
-    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
     with:
-      approvers: ff67605a-b3ca-11ef-9745-42010a83ae7d
-      disallowLaunchByUser: false
       instructions: some
+      disallowLaunchByUser: false
+      approvers: 4bc37dfe-459a-11ed-a6a3-42010a83ae66
+      notifyAllEligibleUsers: false
       approvalInputs: |
         in1:
           type: string
@@ -32,6 +32,8 @@ jobs:
           options:
             - op1
             - op2
+    timeout-minutes: 4320
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
   echo-approval-inputs:
     steps:
       - uses: docker://golang:1.20.3-alpine3.17
